@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `Categories`;
 CREATE TABLE `Categories` (
   `CategoryId` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(45) DEFAULT NULL,
+  `CategoryDescription` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`CategoryId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +40,7 @@ DROP TABLE IF EXISTS `Order Details`;
 CREATE TABLE `Order Details` (
   `OrderId` int(11) NOT NULL,
   `ProductId` int(11) DEFAULT NULL,
-  `UnitPrice` varchar(45) DEFAULT NULL,
+  `UnitPrice` decimal(6,4) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
   KEY `OrderId_idx` (`OrderId`),
   KEY `ProductId_idx` (`ProductId`),
@@ -58,7 +59,8 @@ DROP TABLE IF EXISTS `Orders`;
 CREATE TABLE `Orders` (
   `OrderId` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) DEFAULT NULL,
-  `OrderDate` varchar(45) DEFAULT NULL,
+  `OrderDate` datetime DEFAULT NULL,
+  `ShippedDate` datetime DEFAULT NULL,
   PRIMARY KEY (`OrderId`),
   KEY `UserId_idx` (`UserId`),
   CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `users` (`UserId`)
@@ -75,7 +77,12 @@ DROP TABLE IF EXISTS `Products`;
 CREATE TABLE `Products` (
   `ProductId` int(11) NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(45) DEFAULT NULL,
+  `ProductDescription` varchar(45) DEFAULT NULL,
+  `ProductPhoto` blob,
   `CategoryId` int(11) DEFAULT NULL,
+  `QuantityPerUnit` varchar(45) DEFAULT NULL,
+  `UnitPrice` decimal(6,4) DEFAULT NULL,
+  `UnitsInStock` int(11) DEFAULT NULL,
   PRIMARY KEY (`ProductId`),
   KEY `CategoryId_idx` (`CategoryId`),
   CONSTRAINT `CategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `products` (`ProductId`)
@@ -111,4 +118,4 @@ CREATE TABLE `Users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-16 17:36:02
+-- Dump completed on 2019-04-16 19:13:44
