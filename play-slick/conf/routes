@@ -38,5 +38,3 @@ GET           /orders/:id            controllers.OrderController.getOrder(id: St
 POST          /orders                controllers.OrderController.addOrder
 PUT           /orders/:id            controllers.OrderController.updateOrder(id: String)
 DELETE        /orders/:id            controllers.OrderController.deleteOrder(id: String)
-
-      
