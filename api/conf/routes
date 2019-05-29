@@ -8,43 +8,27 @@ GET           /assets/*file              controllers.Assets.versioned(path="/pub
 
 GET           /users                     controllers.UserController.getUsers
 GET           /users/:id                 controllers.UserController.getUser(id: Int)
-+nocsrf
 POST          /users                     controllers.UserController.addUser
-+nocsrf
 PUT           /users/:id                 controllers.UserController.updateUser(id: Int)
-+nocsrf
 DELETE        /users/:id                 controllers.UserController.deleteUser(id: Int)
 
 GET           /categories                controllers.CategoryController.getCategories
 GET           /categories/:id            controllers.CategoryController.getCategory(id: Int)
-+nocsrf
 POST          /categories                controllers.CategoryController.addCategory
-+nocsrf
 PUT           /categories/:id             controllers.CategoryController.updateCategory(id: Int)
-+nocsrf
 DELETE        /categories/:id            controllers.CategoryController.deleteCategory(id: Int)
 
 GET           /products                  controllers.ProductController.getProducts
 GET           /products/:id              controllers.ProductController.getProduct(id: Int)
-+nocsrf
 POST          /products                  controllers.ProductController.addProduct
-+nocsrf
 PUT           /products/:id              controllers.ProductController.updateProduct(id: Int)
-+nocsrf
 DELETE        /products                  controllers.ProductController.deleteProduct(id: Int)
 
 GET           /orders                    controllers.OrderController.getOrders
 GET           /orders/:id                controllers.OrderController.getOrder(id: Int)
-+nocsrf
 POST          /orders                    controllers.OrderController.addOrder
-+nocsrf
 PUT           /orders/:id                controllers.OrderController.updateOrder(id: Int)
-+nocsrf
 DELETE        /orders                    controllers.OrderController.deleteOrder(id: Int)
 
-GET           /orders-details            controllers.OrderDetailsController.getOrdersDetails
-GET           /orders-details/:id        controllers.OrderDetailsController.getOrderDetails(id: Int)
-+nocsrf
-POST          /orders-details            controllers.OrderDetailsController.addOrderDetails
-+nocsrf
-DELETE        /orders-details            controllers.OrderDetailsController.deleteOrderDetails(id: Int)
+GET           /order-details            controllers.OrderDetailsController.getOrdersDetails
+POST          /order-details            controllers.OrderDetailsController.addOrderDetails

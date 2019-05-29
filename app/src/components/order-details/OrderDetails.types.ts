@@ -5,7 +5,7 @@ export type OrderDetails = {
   quantity: number;
 };
 
-export type OrderDetailsPostData = {
+export type OrderDetailPostData = {
   productId: number;
   unitPrice: number;
   quantity: number;

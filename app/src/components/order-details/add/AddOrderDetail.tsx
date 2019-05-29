@@ -1,16 +1,16 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 
-import { OrderDetailsPostData } from '../OrdersDetails.types';
+import { OrderDetailPostData } from '../OrderDetails.types';
 
-type AddOrderState = {
+type AddOrderDetailState = {
   productId: string;
   unitPrice: string;
   quantity: string;
 };
 
-class AddOrderDetails extends Component<any, AddOrderState> {
-  state: AddOrderState = {
+class AddOrderDetail extends Component<any, AddOrderDetailState> {
+  state: AddOrderDetailState = {
     productId: '',
     unitPrice: '',
     quantity: '',
@@ -35,7 +35,7 @@ class AddOrderDetails extends Component<any, AddOrderState> {
                 && unitPrice !== null
                 && quantity !== null
               ) {
-                const data: OrderDetailsPostData = {
+                const data: OrderDetailPostData = {
                   productId: parseInt(productId),
                   unitPrice: parseInt(unitPrice),
                   quantity: parseInt(quantity),
@@ -102,4 +102,4 @@ class AddOrderDetails extends Component<any, AddOrderState> {
   }
 }
 
-export default AddOrderDetails;
+export default AddOrderDetail;

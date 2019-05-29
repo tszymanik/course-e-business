@@ -1,22 +1,18 @@
 package controllers
 
-import models.OrderRepository
-
-
 import java.sql.Timestamp
+
 import javax.inject._
-import scala.concurrent.{ExecutionContext, Future}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
 import play.api.mvc._
+import repositories.OrderRepository
+
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class OrderController @Inject()(orderRepository: OrderRepository, cc: ControllerComponents)(implicit ec: ExecutionContext) extends AbstractController(cc) {
-
-  def index = Action {
-    Ok("OrderController")
-  }
 
   def getOrders() = {
     Action.async { implicit request =>

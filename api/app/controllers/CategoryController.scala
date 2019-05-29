@@ -1,30 +1,16 @@
 package controllers
 
-import models.CategoryRepository
-
 import javax.inject._
-import scala.concurrent.{ExecutionContext, Future}
-import play.api.libs.json.Json
 import play.api.data.Form
 import play.api.data.Forms._
+import play.api.libs.json.Json
 import play.api.mvc._
+import repositories.CategoryRepository
 
-/**
-  * This controller creates an `Action` to handle HTTP requests to the
-  * application's home page.
-  */
+import scala.concurrent.{ExecutionContext, Future}
+
 @Singleton
 class CategoryController @Inject()(categoryRepository: CategoryRepository, cc: ControllerComponents)(implicit ec: ExecutionContext) extends AbstractController(cc) {
-
-  /**
-    * Create an Action to render an HTML page with a welcome message.
-    * The configuration in the `routes` file means that this method
-    * will be called when the application receives a `GET` request with
-    * a path of `/`.
-    */
-  def index = Action {
-    Ok("CategoryController")
-  }
 
   def getCategories = {
     Action.async { implicit request =>

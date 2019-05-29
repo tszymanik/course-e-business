@@ -1,6 +1,6 @@
 package controllers
 
-import models.UserRepository
+import repositories.UserRepository
 
 import javax.inject._
 import scala.concurrent.{ExecutionContext, Future}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 
-import { OrderDetails } from './OrdersDetails.types';
+import { OrderDetails } from './OrderDetails.types';
 
 type OrdersState = {
   ordersDetails: OrderDetails[];
