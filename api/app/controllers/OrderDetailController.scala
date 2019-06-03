@@ -11,7 +11,16 @@ import repositories.OrderDetailRepository
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class OrderDetailsController @Inject()(orderDetailRepository: OrderDetailRepository, cc: ControllerComponents)(implicit ec: ExecutionContext) extends AbstractController(cc) {
+class OrderDetailController @Inject()(orderDetailRepository: OrderDetailRepository, cc: ControllerComponents)(implicit ec: ExecutionContext) extends AbstractController(cc) {
+  val orderDetailForm: Form[OrderDetailForm] = Form {
+    mapping(
+      "orderId" -> number,
+      "productId" -> number,
+      "unitPrice" -> of(doubleFormat),
+      "quantity" -> number,
+    )(OrderDetailForm.apply)(OrderDetailForm.unapply)
+  }
+
   def getOrdersDetails() = {
     Action.async { implicit request =>
       orderDetailRepository.getOrdersDetails().map {
@@ -20,30 +29,63 @@ class OrderDetailsController @Inject()(orderDetailRepository: OrderDetailReposit
     }
   }
 
-  val orderDetailsForm: Form[OrderDetailForm] = Form {
-    mapping(
-      "productId" -> number,
-      "unitPrice" -> of(doubleFormat),
-      "quantity" -> number,
-    )(OrderDetailForm.apply)(OrderDetailForm.unapply)
+  def getOrderDetail(id: Int) = Action.async {
+    implicit request =>
+      val computerAndOptions = for {
+        orderDetail <- orderDetailRepository.getOrderDetailById(id)
+      } yield (orderDetail)
+
+      computerAndOptions.map { case (computer) =>
+        computer match {
+          case Some(orderDetail) => Ok(Json.toJson(orderDetail))
+          case None => NotFound
+        }
+      }
   }
 
-  def addOrderDetails = Action.async { implicit request =>
-    orderDetailsForm.bindFromRequest.fold(
+  def addOrderDetail = Action.async { implicit request =>
+    orderDetailForm.bindFromRequest.fold(
       _ => {
         Future.successful(BadRequest("Failed to add."))
       },
-      orderDetails => {
-        orderDetailRepository.addOrderDetails(
-          orderDetails.productId,
-          orderDetails.unitPrice,
-          orderDetails.quantity
-        ).map { orderDetails =>
-          Created(Json.toJson(orderDetails))
+      orderDetail => {
+        orderDetailRepository.addOrderDetail(
+          orderDetail.orderId,
+          orderDetail.productId,
+          orderDetail.unitPrice,
+          orderDetail.quantity
+        ).map { orderDetail =>
+          Created(Json.toJson(orderDetail))
         }
       }
     )
   }
+
+  def updateOrderDetail(id: Int) = {
+    Action.async(parse.json) {
+      implicit request =>
+        orderDetailForm.bindFromRequest.fold(
+          _ => {
+            Future.successful(BadRequest("Failed to update."))
+          },
+          orderDetail => {
+            orderDetailRepository.updateOrderDetail(models.OrderDetail(
+              id,
+              orderDetail.orderId,
+              orderDetail.productId,
+              orderDetail.unitPrice,
+              orderDetail.quantity
+            )).map({ _ =>
+              Ok
+            })
+          }
+        )
+    }
+  }
+
+  def deleteOrderDetail(id: Int) = Action.async(
+    orderDetailRepository.deleteOrderDetail(id).map(_ => Ok("Removed."))
+  )
 }
 
-case class OrderDetailForm(productId: Int, unitPrice: Double, quantity: Int)
+case class OrderDetailForm(orderId: Int, productId: Int, unitPrice: Double, quantity: Int)

@@ -4,31 +4,34 @@
 # ~~~~
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file              controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
-GET           /users                     controllers.UserController.getUsers
-GET           /users/:id                 controllers.UserController.getUser(id: Int)
-POST          /users                     controllers.UserController.addUser
-PUT           /users/:id                 controllers.UserController.updateUser(id: Int)
-DELETE        /users/:id                 controllers.UserController.deleteUser(id: Int)
+GET           /users                    controllers.UserController.getUsers
+GET           /users/:id                controllers.UserController.getUser(id: Int)
+POST          /users                    controllers.UserController.addUser
+PUT           /users/:id                controllers.UserController.updateUser(id: Int)
+DELETE        /users/:id                controllers.UserController.deleteUser(id: Int)
 
-GET           /categories                controllers.CategoryController.getCategories
-GET           /categories/:id            controllers.CategoryController.getCategory(id: Int)
-POST          /categories                controllers.CategoryController.addCategory
-PUT           /categories/:id             controllers.CategoryController.updateCategory(id: Int)
-DELETE        /categories/:id            controllers.CategoryController.deleteCategory(id: Int)
+GET           /categories               controllers.CategoryController.getCategories
+GET           /categories/:id           controllers.CategoryController.getCategory(id: Int)
+POST          /categories               controllers.CategoryController.addCategory
+PUT           /categories/:id           controllers.CategoryController.updateCategory(id: Int)
+DELETE        /categories/:id           controllers.CategoryController.deleteCategory(id: Int)
 
-GET           /products                  controllers.ProductController.getProducts
-GET           /products/:id              controllers.ProductController.getProduct(id: Int)
-POST          /products                  controllers.ProductController.addProduct
-PUT           /products/:id              controllers.ProductController.updateProduct(id: Int)
-DELETE        /products                  controllers.ProductController.deleteProduct(id: Int)
+GET           /products                 controllers.ProductController.getProducts
+GET           /products/:id             controllers.ProductController.getProduct(id: Int)
+POST          /products                 controllers.ProductController.addProduct
+PUT           /products/:id             controllers.ProductController.updateProduct(id: Int)
+DELETE        /products                 controllers.ProductController.deleteProduct(id: Int)
 
-GET           /orders                    controllers.OrderController.getOrders
-GET           /orders/:id                controllers.OrderController.getOrder(id: Int)
-POST          /orders                    controllers.OrderController.addOrder
-PUT           /orders/:id                controllers.OrderController.updateOrder(id: Int)
-DELETE        /orders                    controllers.OrderController.deleteOrder(id: Int)
+GET           /orders                   controllers.OrderController.getOrders
+GET           /orders/:id               controllers.OrderController.getOrder(id: Int)
+POST          /orders                   controllers.OrderController.addOrder
+PUT           /orders/:id               controllers.OrderController.updateOrder(id: Int)
+DELETE        /orders                   controllers.OrderController.deleteOrder(id: Int)
 
-GET           /order-details            controllers.OrderDetailsController.getOrdersDetails
-POST          /order-details            controllers.OrderDetailsController.addOrderDetails
+GET           /order-details            controllers.OrderDetailController.getOrdersDetails()
+GET           /order-details/:id        controllers.OrderDetailController.getOrderDetail(id: Int)
+POST          /order-details            controllers.OrderDetailController.addOrderDetail
+PUT           /order-details/:id        controllers.OrderDetailController.updateOrderDetail(id: Int)
+DELETE        /order-details            controllers.OrderDetailController.deleteOrderDetail(id: Int)

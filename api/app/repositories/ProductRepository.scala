@@ -14,25 +14,6 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider, cate
 
   import dbConfig._
   import profile.api._
-
-  class ProductTable(tag: Tag) extends Table[Product](tag, "Products") {
-    def id = column[Int]("ProductId", O.PrimaryKey, O.AutoInc)
-
-    def name = column[String]("ProductName")
-
-    def description = column[String]("ProductDescription")
-
-    def categoryId = column[Int]("CategoryId")
-
-    def quantityPerUnit = column[String]("QuantityPerUnit")
-
-    def unitPrice = column[Double]("UnitPrice")
-
-    def unitsInStock = column[Int]("UnitsInStock")
-
-    def * = (id, name, description, categoryId, quantityPerUnit, unitPrice, unitsInStock) <> ((Product.apply _).tupled, Product.unapply)
-  }
-
   private val products = TableQuery[ProductTable]
 
   def getProducts(): Future[Seq[Product]] = db.run {
@@ -85,5 +66,23 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider, cate
 
   def deleteProduct(id: Int): Future[Unit] = db.run {
     products.filter(_.id === id).delete.map(_ => ())
+  }
+
+  class ProductTable(tag: Tag) extends Table[Product](tag, "Products") {
+    def * = (id, name, description, categoryId, quantityPerUnit, unitPrice, unitsInStock) <> ((Product.apply _).tupled, Product.unapply)
+
+    def id = column[Int]("ProductId", O.PrimaryKey, O.AutoInc)
+
+    def name = column[String]("ProductName")
+
+    def description = column[String]("ProductDescription")
+
+    def categoryId = column[Int]("CategoryId")
+
+    def quantityPerUnit = column[String]("QuantityPerUnit")
+
+    def unitPrice = column[Double]("UnitPrice")
+
+    def unitsInStock = column[Int]("UnitsInStock")
   }
 }

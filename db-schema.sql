@@ -38,10 +38,12 @@ DROP TABLE IF EXISTS `Order Details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `Order Details` (
+  `OrderDetailId` int(11) NOT NULL AUTO_INCREMENT,
   `OrderId` int(11) NOT NULL,
   `ProductId` int(11) DEFAULT NULL,
   `UnitPrice` decimal(6,4) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`OrderDetailId`),
   KEY `OrderId_idx` (`OrderId`),
   KEY `ProductId_idx` (`ProductId`),
   CONSTRAINT `OrderId` FOREIGN KEY (`OrderId`) REFERENCES `orders` (`OrderId`),

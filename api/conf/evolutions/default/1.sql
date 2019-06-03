@@ -49,16 +49,17 @@ CREATE TABLE `Products`
 
 CREATE TABLE `Order Details`
 (
-    `OrderId`   int(11) NOT NULL,
-    `ProductId` int(11)       DEFAULT NULL,
-    `UnitPrice` decimal(6, 4) DEFAULT NULL,
-    `Quantity`  int(11)       DEFAULT NULL,
+    `OrderDetailId` int(11) NOT NULL AUTO_INCREMENT,
+    `OrderId`       int(11) NOT NULL,
+    `ProductId`     int(11)       DEFAULT NULL,
+    `UnitPrice`     decimal(6, 4) DEFAULT NULL,
+    `Quantity`      int(11)       DEFAULT NULL,
+    PRIMARY KEY (`OrderDetailId`),
     KEY `OrderId_idx` (`OrderId`),
     KEY `ProductId_idx` (`ProductId`),
     CONSTRAINT `OrderId` FOREIGN KEY (`OrderId`) REFERENCES `Orders` (`OrderId`),
     CONSTRAINT `ProductId` FOREIGN KEY (`ProductId`) REFERENCES `Products` (`ProductId`)
 );
-
 
 
 -- !Downs
